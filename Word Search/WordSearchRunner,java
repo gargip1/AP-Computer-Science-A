@@ -1,0 +1,49 @@
+import java.util.Scanner;
+import java.io.*;
+import java.util.Arrays;
+
+ public class WordSearchRunner {
+	public static void wsMain(String fileName) throws FileNotFoundException
+   {
+	
+		// instantiate Scanner object to read in from file
+		Scanner scan = new Scanner(new File(fileName));
+         System.out.println(fileName);
+       System.out.println("Starting main");
+      System.out.println("Done with array");
+		// read in rows 
+		int rows = scan.nextInt();
+		// read in columns
+		int cols = scan.nextInt();
+        scan.nextLine();
+       scan.nextLine();
+		// instantiate WordSearch object passing in number of rows & columns for 2D array
+		WordSearch w = new WordSearch(rows, cols);
+		// loop through the rows in the file
+		for (int i = 0; i < rows; i++) 
+          {
+            String[] rowValues = scan.nextLine().split(" ");
+			// loop through the columns in the file
+			for (int j = 0; j < cols; j++) 
+            {
+				// read in value from file using local variable
+              w.setSpot(rowValues[j], i, j);
+            }
+        }
+      
+		// read number of words to search for from file
+		int words = scan.nextInt();
+        scan.nextLine();
+     System.out.println("NumWords=" + words);
+		// loops through the words
+		for (int a = 0; a < words; a++)
+          {
+			// read in word from file
+			String fileWord = scan.next();
+			// method call to search for the word in the 2D array
+			boolean wordFound = w.inGrid(fileWord);
+			// print out word to search for and true/false
+			System.out.println(fileWord + " -> " + wordFound);
+          }
+     }
+   }
